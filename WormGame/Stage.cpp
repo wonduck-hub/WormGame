@@ -49,4 +49,8 @@ Stage::Stage(int _xSize, int _ySize)
 
 Stage::~Stage()
 {
+	for (size_t i = 0; i < obj.size(); ++i)
+	{
+		delete obj[i];
+	}
 }
