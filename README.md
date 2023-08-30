@@ -1,3 +1,3 @@
 # 지렁이 게임
 
-<img src="Untitled.png">
+<img src="1234.png">
