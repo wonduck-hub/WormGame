@@ -41,19 +41,27 @@ int main()
 
     startT = clock();
     
+    int input = UP_ARROW;
 
     while (s.isRun())
     {
         setCursorPosition(0, 0);
 
-        
-
-        /*finishT = clock();
-        if ((double)(finishT - startT) > 1000)
+        if (_kbhit())
         {
+            input = _getch();
+        }
+
+        finishT = clock();
+        if ((double)(finishT - startT) > 500)
+        {
+            
             startT = finishT;
-        }*/
-        s.update();
+
+            
+            s.update(input);
+        }
+        
         s.show();
     }
 

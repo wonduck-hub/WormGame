@@ -8,6 +8,11 @@
 
 using namespace std;
 
+const int RIGHT_ARROW = 77;
+const int LEFT_ARROW = 75;
+const int UP_ARROW = 72;
+const int DOWN_ARROW = 80;
+
 //불록 종류
 enum class BLOCK : char
 {
@@ -36,7 +41,7 @@ public:
 	void start();
 
 	void show();
-	void update();
+	void update(const int _input);
 
 public:
 	Stage(int _xSize, int _ySize);

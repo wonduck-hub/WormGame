@@ -5,10 +5,7 @@
 #include "Stage.h"
 #include "Apple.h"
 
-const int RIGHT_ARROW = 77;
-const int LEFT_ARROW = 75;
-const int UP_ARROW = 72;
-const int DOWN_ARROW = 80;
+
 
 void Stage::start()
 {
@@ -56,41 +53,38 @@ void Stage::show()
 
 }
 
-void Stage::update()
+void Stage::update(const int _input)
 {
-	int input;
 
 	// 키보드 입력
-	if (_kbhit())
+
+
+	switch (_input)
 	{
-		input = _getch();
-
-		switch (input)
-		{
-		case RIGHT_ARROW:
-			((Worm*)obj[0])->moveRight();
-			break;
-		case LEFT_ARROW:
-			((Worm*)obj[0])->moveLeft();
-			break;
-		case UP_ARROW:
-			((Worm*)obj[0])->moveUp();
-			break;
-		case DOWN_ARROW:
-			((Worm*)obj[0])->moveDown();
-			break;
-		default:
-			break;
-		}
-
-		//사과를 먹었을 때
-		if (obj[0]->getX() == obj[1]->getX() &&
-			obj[0]->getY() == obj[1]->getY())
-		{
-			((Apple*)obj[1])->setPos(map);
-			((Worm*)obj[0])->eatApple();
-		}
+	case RIGHT_ARROW:
+		((Worm*)obj[0])->moveRight();
+		break;
+	case LEFT_ARROW:
+		((Worm*)obj[0])->moveLeft();
+		break;
+	case UP_ARROW:
+		((Worm*)obj[0])->moveUp();
+		break;
+	case DOWN_ARROW:
+		((Worm*)obj[0])->moveDown();
+		break;
+	default:
+		break;
 	}
+
+	//사과를 먹었을 때
+	if (obj[0]->getX() == obj[1]->getX() &&
+		obj[0]->getY() == obj[1]->getY())
+	{
+		((Apple*)obj[1])->setPos(map);
+		((Worm*)obj[0])->eatApple();
+	}
+
 }
 
 Stage::Stage(int _xSize, int _ySize)
