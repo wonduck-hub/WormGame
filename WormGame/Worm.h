@@ -4,6 +4,8 @@
 
 #include "CObject.h"
 #include "Stage.h"
+#include "Struct.h"
+#include "Apple.h"
 
 using std::vector;
 
@@ -11,18 +13,23 @@ class Worm : public CObject
 {
 private:
 	int length;
-	vector<char> body;
+	vector<Vec2> body;
+	Vec2 prevPos;
 
 public:
-
+	virtual void show(vector<vector<char>>& _map, const int _sizeX, const int _sizeY);
 
 public:
-	Worm(int _headX, int _headY) : length(1)
-	{
-		setX(_headX);
-		setY(_headY);
-		body.push_back('@'); //나중에 (char)BLOCK::HEAD가 안 되는 이유 찾기
-	}
+	void moveLeft();
+	void moveRight();
+	void moveUp();
+	void moveDown();
+
+public:
+	void eatApple();
+
+public:
+	Worm(int _headX, int _headY);
 	~Worm();
 };
 

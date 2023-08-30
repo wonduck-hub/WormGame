@@ -1,16 +1,49 @@
+#include <conio.h>
+#include <cstdlib>
+#include <Windows.h>
+
 #include "Stage.h"
+#include "Apple.h"
+
+const int RIGHT_ARROW = 77;
+const int LEFT_ARROW = 75;
+const int UP_ARROW = 72;
+const int DOWN_ARROW = 80;
 
 void Stage::start()
 {
 	// 기본 지렁이 생성
 	Worm* w = new Worm(25, 10);
+	Apple* a = new Apple();
 
 	obj.push_back(w);
-
+	obj.push_back(a);
 }
 
 void Stage::show()
 {
+	//map 초기화
+	for (int i = 0; i < ySize; ++i)
+	{
+		for (int j = 0; j < xSize; ++j)
+		{
+			if (i == 0 || i == (ySize - 1) || j == 0 || j == (xSize - 1))
+			{
+				map[i][j] = ((char)BLOCK::WALL);
+			}
+			else
+			{
+				map[i][j] = ((char)BLOCK::NOMAL);
+			}
+		}
+	}
+
+	//show worm and apple
+	for (int i = 0; i < obj.size(); ++i)
+	{
+		obj[i]->show(map, xSize, ySize);
+	}
+
 	//show map
 	for (int i = 0; i < ySize; ++i)
 	{
@@ -21,9 +54,43 @@ void Stage::show()
 		cout << std::endl;
 	}
 
-	//show worm
+}
 
+void Stage::update()
+{
+	int input;
 
+	// 키보드 입력
+	if (_kbhit())
+	{
+		input = _getch();
+
+		switch (input)
+		{
+		case RIGHT_ARROW:
+			((Worm*)obj[0])->moveRight();
+			break;
+		case LEFT_ARROW:
+			((Worm*)obj[0])->moveLeft();
+			break;
+		case UP_ARROW:
+			((Worm*)obj[0])->moveUp();
+			break;
+		case DOWN_ARROW:
+			((Worm*)obj[0])->moveDown();
+			break;
+		default:
+			break;
+		}
+
+		//사과를 먹었을 때
+		if (obj[0]->getX() == obj[1]->getX() &&
+			obj[0]->getY() == obj[1]->getY())
+		{
+			((Apple*)obj[1])->setPos(map);
+			((Worm*)obj[0])->eatApple();
+		}
+	}
 }
 
 Stage::Stage(int _xSize, int _ySize)

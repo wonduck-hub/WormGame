@@ -25,7 +25,7 @@ private:
 	int ySize;
 	bool run = false;
 	vector<vector<char>> map;
-	vector<CObject*> obj;
+	vector<CObject*> obj; //0번째 오브젝트는 지렁이 그 이후부턴 사과
 
 public:
 	bool isRun()
@@ -36,6 +36,7 @@ public:
 	void start();
 
 	void show();
+	void update();
 
 public:
 	Stage(int _xSize, int _ySize);

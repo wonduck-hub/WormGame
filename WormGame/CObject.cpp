@@ -1,6 +1,7 @@
 #include "CObject.h"
+#include "Struct.h"
 
-CObject::CObject()
+CObject::CObject() : index(Vec2{1, 1})
 {
 }
 

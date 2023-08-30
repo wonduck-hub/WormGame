@@ -6,6 +6,7 @@
 
 #include "Stage.h"
 #include "Worm.h"
+#include "Define.h"
 
 //커서 위치 변경 함수
 void setCursorPosition(int x, int y)
@@ -28,52 +29,31 @@ void ShowConsoleCursor(bool showFlag)
     SetConsoleCursorInfo(out, &cursorInfo);
 }
 
-const int RIGHT_ARROW = 77;
-const int LEFT_ARROW = 75;
-const int UP_ARROW = 72;
-const int DOWN_ARROW = 80;
-
 int main()
 {
     ShowConsoleCursor(false);
 
     clock_t startT, finishT;
 
-    Worm w(25, 10);
-
-    Stage s(50, 20);
+    Stage s(X, Y);
 
     s.start();
 
     startT = clock();
-    int input;
+    
 
     while (s.isRun())
     {
         setCursorPosition(0, 0);
 
+        
 
-        if (_kbhit())
-        {
-            input = _getch();
-
-            switch (input)
-            {
-            case RIGHT_ARROW:
-                break;
-            case LEFT_ARROW:
-                break;
-            default:
-                break;
-            }
-        }
-
-        finishT = clock();
+        /*finishT = clock();
         if ((double)(finishT - startT) > 1000)
         {
             startT = finishT;
-        }
-
+        }*/
+        s.update();
         s.show();
     }
 
